@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createPostAsync } from "./postSlice";
+import { Dispatch } from "redux";
 
 function PostForm() {
 
-  const dispatch = useDispatch();
+  const dispatch: Dispatch<any> = useDispatch();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
