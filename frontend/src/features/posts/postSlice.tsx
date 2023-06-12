@@ -24,6 +24,14 @@ export interface PostsState {
   status: string;
 }
 
+export interface PostFormData {
+  post: {
+    id?: string,
+    title: string,
+    body: string
+  }
+}
+
 const initialState: PostsState = {
   posts: [
     {
