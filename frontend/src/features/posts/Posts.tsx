@@ -2,6 +2,7 @@ import React, { Dispatch, useEffect } from "react";
 import { Statuses, fetchPostsAsync, selectPosts, selectStatus } from "./postSlice";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../app/hooks";
+import Post from "./Post";
 
 
 function Posts() {
@@ -24,8 +25,10 @@ function Posts() {
           <h3>{status}</h3>
           {posts && posts.length > 0 && posts.map(post => {
             return <div key={post.id} style={{margin:"5em"}}>
-              <h3>{post.title}</h3>
-              <p>{post.body}</p>
+              <Post
+                dispatch={dispatch}
+                post={post}
+              />
             </div>
           })}
         </div>
