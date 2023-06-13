@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import produce from "immer";
 import { RootState } from "../../app/store";
-import { fetchPosts, createPost } from "./postsAPI";
+import { fetchPosts, createPost, destroyPost } from "./postsAPI";
 
 export enum Statuses {
   Initial = "Not Fetched",
@@ -12,24 +12,35 @@ export enum Statuses {
 }
 
 export interface PostState {
-  id?: number,
-  title?: string,
-  body?: string,
-  created_at?: any,
-  updated_at?: any
+  id?: number;
+  title?: string;
+  body?: string;
+  created_at?: any;
+  updated_at?: any;
 }
 
 export interface PostsState {
-  posts: PostState[],
+  posts: PostState[];
   status: string;
 }
 
 export interface PostFormData {
   post: {
-    id?: string,
-    title: string,
-    body: string
+    id?: string;
+    title: string;
+    body: string;
   }
+}
+
+export interface PostDeleteData {
+  post: {
+    post_id: number;
+  }
+}
+
+export interface PostUpdateData {
+  post_id: number;
+  post: PostState;
 }
 
 const initialState: PostsState = {
@@ -55,8 +66,17 @@ export const fetchPostsAsync = createAsyncThunk(
 
 export const createPostAsync = createAsyncThunk(
   'posts/createPost',
-  async (payload: PostFormData)=> {
+  async (payload: PostFormData) => {
     const response = await createPost(payload);
+
+    return response;
+  }
+)
+
+export const destroyPostAsync = createAsyncThunk(
+  'posts/destroyPost',
+  async (payload: PostDeleteData) => {
+    const response = await destroyPost(payload);
 
     return response;
   }
