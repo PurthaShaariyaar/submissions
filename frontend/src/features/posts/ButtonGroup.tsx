@@ -13,7 +13,7 @@ function ButtonGroup(props:any) {
   }
 
   return <div className="btn-group float-end">
-    <button className="btn btn-warning">Edit</button>
+    <button className="btn btn-warning" onClick={() => props.toggleEditForm()}>Edit</button>
     <button className="btn btn-danger" onClick={(e) => handleClick(e)}>Delete</button>
   </div>
 }
