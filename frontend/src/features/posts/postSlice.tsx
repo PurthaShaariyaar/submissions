@@ -138,6 +138,30 @@ export const postSlice = createSlice({
           draftState.status = Statuses.Error;
         })
       })
+
+      // DELETE POST SECTION
+
+      // Waiting to delete post
+      .addCase(destroyPostAsync.pending, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Loading;
+        })
+      })
+
+      // Delete post complete
+      .addCase(destroyPostAsync.fulfilled, (state, action) => {
+        return produce(state, (draftState) => {
+          draftState.posts = action.payload;
+          draftState.status = Statuses.UpToDate;
+        })
+      })
+
+      // Error occurred while deleting a post
+      .addCase(destroyPostAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        })
+      })
   }
 })
 

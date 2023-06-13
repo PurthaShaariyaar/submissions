@@ -1,11 +1,12 @@
 import React from "react";
+import { destroyPostAsync } from "./postSlice";
 
 function ButtonGroup(props:any) {
 
   function handleClick(e:any) {
     const payload = {
       post: {
-        post_id: props.post.id
+        post_id: props.post_id
       }
     }
     props.dispatch(destroyPostAsync(payload));
